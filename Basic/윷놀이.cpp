@@ -16,7 +16,7 @@ int main() {
         else if(cnt == 3) cout<<"C";
         else if(cnt == 2) cout<<"B";
         else if(cnt == 1) cout<<"A";
-        else cout<<"F";
+        else cout<<"E";
         cout<<"\n";
 
     }
