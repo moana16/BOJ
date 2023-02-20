@@ -55,7 +55,7 @@ int main(){
     }
     cout<<result-1<<endl;
     return 0;
-  
+
 
 
 }
