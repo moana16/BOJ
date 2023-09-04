@@ -17,7 +17,7 @@ int main() {
         }
         
         string tmp;
-        for(long long j=sz; j >= 0; j--) {
+        for(long long j=sz; j >= 0; j--) { 
             tmp.push_back(str[i][j]);
         }
         res.push_back(stoll(tmp));
