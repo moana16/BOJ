@@ -7,7 +7,7 @@ int ans = 0;
 int dx[] = {1, 0, -1, 0};
 int dy[] = {0, 1, 0, -1};
 
-bool dfs() {
+bool sol() {
     queue<pair<int, int>> q;
     bool visited[15][10] = {false};
     bool isPuyo = false;
@@ -68,7 +68,7 @@ int main() {
     }
 
     while (1) {
-        bool isPuyo = dfs();
+        bool isPuyo = sol();
         if (!isPuyo)
             break;
 
