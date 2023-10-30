@@ -1,6 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int st = 0;
+int en = 0;
+long long ans = 0;
+unordered_map<int, int> freq;
+
 int main() {
     int N;
     cin >> N;
@@ -8,11 +13,7 @@ int main() {
     for (int i = 0; i < N; i++) {
         cin >> v[i];
     }
-    
-    int st = 0;
-    int en = 0;
-    long long ans = 0;
-    unordered_map<int, int> freq;
+    // 1 2 3 4 5
     
     while (st < N) {
         if (en == N) {
@@ -30,7 +31,7 @@ int main() {
         }
     }
     
-    cout << ans << '\n';
+    cout << ans;
 
     return 0;
 }
