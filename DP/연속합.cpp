@@ -1,21 +1,16 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-constexpr int MAX = 1e5+3;
-int N;
-int arr[MAX];
-int dp[MAX];
-
 int main() {
-    cin>>N;
-    for(int i=1; i<=N; ++i) {
-        cin>>arr[i];
-        dp[i] = arr[i];
-    }
+    int n; cin>>n;
+    int arr[100003];
+    for(int i=1; i<=n; i++) cin>>arr[i];
 
-    for(int i=1; i<=N; ++i) {
-        dp[i] = max(dp[i], dp[i-1] + arr[i]);
-    }
-    cout<<*max_element(dp+1, dp+N+1);
+    int dp[100003];
 
+    for(int i=1; i<=n; i++) {
+        dp[i] = max(arr[i], dp[i-1]+arr[i]);
+
+    }
+    cout<<*max_element(dp+1, dp+n+1);
 }
