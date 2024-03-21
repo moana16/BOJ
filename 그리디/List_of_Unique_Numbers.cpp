@@ -16,12 +16,9 @@ int main() {
     long long ans = 0;
     unordered_map<int,int> cnt;
 
-    while(s < N) {
-        if(e == N) {
-            e = s;
-            s++;
-        }
-        else {
+    while(e < N) {
+        
+        
             if(cnt[v[e]] == 0) {
                 cnt[v[e]]++;
                 e++;
@@ -31,7 +28,9 @@ int main() {
                 cnt[v[s]]--;
                 s++;
             }
-        }
+
+            cout << s << ' ' <<e<<' '<<ans<<'\n';
+        
     }
     cout<<ans;
 }
