@@ -1,31 +1,30 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
 int N;
+priority_queue<int, vector<int>, greater<>> times;
 vector<pair<int,int>> v;
-priority_queue<int, vector<int>,greater<>> times;
 
 int main() {
-    ios::sync_with_stdio(false); cin.tie(0);
     cin>>N;
+    int s,t;
     for(int i=0; i<N; i++) {
-        int x,y ; cin>>x>>y;
-        v.push_back({x,y});
+        cin>>s>>t;
+        v.push_back({s,t});
     }
-
     times.push(0);
     sort(v.begin(), v.end());
 
+   for(int i=0; i<N; i++) {
+    int c = times.top();
+    times.pop();
 
-    for(int i=0; i<N; i++) {
-        int c = times.top();
-        int s = v[i].first;
-        int e = v[i].second;
-        times.pop();
-        if( s < c) times.push(c);
-        times.push(e);
-        
-    }
-    cout<<times.size()<<'\n';
+    if(v[i].first < c) times.push(c);
+    times.push(v[i].second);
+   }
+
+   cout<<times.size();
+
+
 
 }
