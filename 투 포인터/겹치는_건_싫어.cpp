@@ -1,29 +1,27 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int N,K;
-int arr[200002];
-int cnt[100002];
-int MAX = 0;
+int N,K,ans = 0;
+int arr[200003];
+map<int,int> mp;
 
 int main() {
-    ios::sync_with_stdio(false); cin.tie(nullptr);
     cin>>N>>K;
-    for(int i=0;i<N;i++)cin>>arr[i];
-
-    int start = 0, end = 0;
-    cnt[arr[0]]++;
+    for(int i=1; i<=N; i++) cin>>arr[i];
+    int st = 1;
+    int en = 1;
     
-    while(end < N) {
-        if(cnt[arr[end]] <= K) {
-            MAX = max(MAX, end-start+1);
-            end++;
-            if(end < N) cnt[arr[end]]++;
+    while (en <= N)
+    {
+        mp[arr[en]]++;
+
+        while(mp[arr[en]] > K) { //앞에 원소들 빈도수 초기화
+            mp[arr[st]]--;
+            st++;
         }
-        else {
-            cnt[arr[start]]--;
-            start++;
-        }
+        ans = max(ans, en-st+1);
+        en++;
     }
-    cout<<MAX;
+    cout<<ans;
+    
 }
