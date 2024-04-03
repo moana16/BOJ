@@ -1,24 +1,30 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-int arr[1000003];
-int ans = 0;
+int N,K; 
+vector<int> v;
 
 int main() {
-    int n,k; cin>>n>>k;
-    for(int i=0;i<n;i++) cin>>arr[i];
-
-    int cnt = 0;
-    if(arr[0] %2 == 1) cnt++;
-    int en = 0;
-    for(int st = 0; st<n; st++) {
-        while(en < n-1 && cnt + arr[en+1]%2 <= k) {
-            en++;
-            cnt += arr[en] %2;
-        }
-        ans = max(ans, en-st+1-cnt);
-        cnt -= arr[st] %2;
+    ios::sync_with_stdio(false); cin.tie(0);
+    cin>>N>>K;
+    for(int i=0; i<N; i++) {
+        int x; cin>>x;
+        v.push_back(x);
     }
-    cout<<ans;
     
+    int st = 0, en = 0, mx = 0, cnt=0;
+
+    while(en < N) {
+        if(cnt > K) {
+            if(v[st] % 2 == 1) cnt--;
+            st++;
+        }
+        else {
+            if(v[en] % 2 == 1) cnt++;
+            en++;
+        }
+        if(cnt <= K) mx = max(mx, en-st-cnt);
+    }
+
+    cout<<mx;
 }
