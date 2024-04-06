@@ -1,25 +1,33 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int N,d,k,c;
-int arr[300003];
-bool check[3001];
-int flag,coupon,MAX = 0;
-int main() {
-    cin>>N>>d>>k>>c;
-    for(int i=0; i<N; i++) cin>>arr[i];
-    for(int i=0; i<N; i++) {
-        flag = 0;
-        coupon = 1;
-        for(int j=i; j<i+k; j++) {
-            if(check[arr[j%N]]) flag++;
-            else check[arr[j%N]] = true;
+int N,d,k,c,ans = 0;
+vector<int> v;
 
-            if(arr[j%N]==c) coupon= 0;
-        }
-        MAX = max(MAX, k-flag+coupon);
-        memset(check, 0, sizeof(check)); // 체크 초기화
+int main() {
+    ios::sync_with_stdio(false); cin.tie(0);
+    cin>>N>>d>>k>>c;
+    for(int i=0; i<N; i++) {
+        int x; cin>>x;
+        v.push_back(x);
     }
-    cout<<MAX;
+    unordered_map<int,int> m;
+
+    for(int i=0; i<k; i++) m[v[i]]++;
+    m[c]++;
+
+    int maxTypes = m.size();
+    for(int start = 1; start < N; start++) {
+        int prev = v[start-1];
+        m[prev]--;
+        if(m[prev] == 0) m.erase(prev);
+
+        int nxt = v[(start+k-1) % N];
+        m[nxt]++;
+
+        maxTypes = max(maxTypes, (int)m.size());
+    }
+
+    cout<<maxTypes;
 
 }
