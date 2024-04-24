@@ -1,16 +1,17 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-int n, k;
-int arr[11];
-int ans = 0;
+int N,K, cnt = 0;
 
 int main() {
-    cin>>n>>k;
-    for(int i=0; i<n; i++) cin>>arr[i];
-    for(int i = n-1; i >= 0; i--) {
-        ans += k / arr[i];
-        k %= arr[i];
+    cin>>N>>K;
+    vector<int> coin(N);
+    for(int i=0; i<N; i++) cin>>coin[i];
+
+    for(int i=N-1; i>=0; i--) {
+        cnt += K / coin[i];
+        K %= coin[i];
+        
     }
-    cout<<ans;
+    cout<<cnt;
 }
