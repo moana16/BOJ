@@ -1,35 +1,34 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-int n;
-bool isUsedRow[30];
-bool isUsedDiag[30];  // x+y
-bool isUsedDiag2[30]; // x-y+n-1
-int ans = 0;
 
-void sol(int x) //x좌표
-{
-    if (x == n)
-    {
-        ans++;
+int N, cnt = 0;
+bool usedRow[30];
+bool usedDiag[30];
+bool usedDiag2[30];
+
+int mat[17][17];
+
+void sol(int x) {
+    if(x == N) {
+        cnt++;
         return;
     }
-    for (int i = 0; i < n; i++) //y좌표
-    {
-        if (isUsedRow[i] || isUsedDiag[i + x] || isUsedDiag2[x - i + n - 1])
-                continue;
-            isUsedRow[i] = true;
-            isUsedDiag[i + x] = true;
-            isUsedDiag2[x - i + n - 1] = true;
-            sol(x + 1);
-            isUsedRow[i] = false;
-            isUsedDiag[i + x] = false;
-            isUsedDiag2[x - i + n - 1] = false;
+
+    for(int y=0; y<N; y++) {
+        if(usedRow[y] || usedDiag[x + y] || usedDiag2[x - y + N - 1]) continue;
+        usedRow[y] = true;
+        usedDiag[x + y] = true;
+        usedDiag2[x - y + N - 1] = true;
+        sol(x + 1);
+        usedRow[y] = false;
+        usedDiag[x + y] = false;
+        usedDiag2[x - y + N - 1] = false;
     }
 }
 
-int main()
-{
-    cin >> n;
+int main() {
+    cin>>N;
     sol(0);
-    cout << ans;
+    cout<<cnt;
+
 }
