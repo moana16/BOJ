@@ -1,31 +1,23 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-int n,m;
-int arr[10];
-bool isUsed[10];
 
-void sol(int k) {
-    if(k == m) {
-        for(int i=0; i<m; i++) cout<<arr[i]<<' ';
+int N,M;
+
+void sol(int cur, vector<int> nums) {
+    if(nums.size() == M) {
+        for(auto n : nums) cout<<n<<" ";
         cout<<'\n';
         return;
     }
-    for(int i=1; i<=n; i++) {
-        if(!isUsed[i]) {
-            if(k > 0 && arr[k-1] > i) continue;
-            isUsed[i]=true;
-            arr[k]=i;
-            sol(k+1);
-            isUsed[i]=false;
-
-        }
+    for(int i=cur+1; i<=N; i++) {
+        nums.push_back(i);
+        sol(i, nums);
+        nums.pop_back();
     }
 }
+
 int main() {
-    ios::sync_with_stdio(false); cin.tie(0);
-    cin>>n>>m;
-    sol(0);
-
-
-
+    cin>>N>>M;
+    vector<int> nums;
+    sol(0,nums);
 }
