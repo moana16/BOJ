@@ -1,30 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<char> str;
-stack<int> s;
-int cnt = 1;
-
+int n, cnt = 1;
+vector<char> ans;
+stack<int> st;
 int main() {
-    int m; cin>>m;
-    for(int i=0; i<m; i++) {
-        int n; cin>>n;
-        while(cnt <= n) {
-            s.push(cnt);
-            str.push_back('+');
+    cin>>n;
+    for(int i=0; i<n; i++) {
+        int x; cin>>x;
+
+        while(cnt <= x) {
+            st.push(cnt);
+            ans.push_back('+');
             cnt++;
-        
         }
-        if(s.top() == n) {
-            s.pop();
-            str.push_back('-');
+        if(st.top() == x) {
+            st.pop();
+            ans.push_back('-');
         }
         else {
             cout<<"NO";
             return 0;
         }
     }
-    for(int i=0; i<str.size(); i++) {
-        cout<<str[i]<<"\n";
-    }
+
+    for(auto c : ans) cout<<c<<'\n';
 }
