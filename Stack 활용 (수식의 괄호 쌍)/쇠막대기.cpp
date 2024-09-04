@@ -1,24 +1,23 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
 int main() {
-    string s; cin>>s;
+    string str; cin>>str;
     stack<char> st;
-    long ans=0;
-    for(int i=0; i<s.size(); i++) {
-        if(s[i] == '(') st.push(s[i]);
+    int ans = 0;
+
+    for(int i=0; i<str.length(); i++) {
+        if(str[i] == '(') {
+            st.push(str[i]);
+        }
         else {
-            if(s[i-1]=='(') { //레이저일때
+            if(!st.empty() && st.top() == '(') {
                 st.pop();
-                ans += st.size(); 
-            
-            }
-            else  { //막대일때
-                
-                st.pop();
-                ans++;
+                if(str[i-1] == '(') ans += st.size();
+                else ans += 1;
             }
         }
+
     }
     cout<<ans;
 }
