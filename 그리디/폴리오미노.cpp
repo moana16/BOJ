@@ -1,55 +1,46 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+string sol(int cnt,  string ans) {
+    while(cnt > 0) {
+        if(cnt - 4 >= 0) {
+            ans += "AAAA";
+            cnt -= 4;
+        }
+        else if(cnt -2 >= 0) {
+            ans += "BB";
+            cnt -= 2;
+        }
+    }
+    return ans;
+}
+
 int main() {
-    ios::sync_with_stdio(false); cin.tie(0);
     string str; cin>>str;
-    string ans = "";
-    int cnt = 0 ;
-
+    string tmp, ans;
     for(auto c : str) {
-        if(c == 'X') {
-            cnt++;
-        }
+        if(c == 'X') tmp += c;
         else {
-            if(cnt > 0) {
-                if(cnt % 2 == 1) {
-                    cout<<-1;
-                    return 0;
+            int sz = tmp.size();
 
-                }
-                while(cnt > 0) {
-                    if(cnt - 4 < 0) {
-                        ans += "BB";
-                        cnt -= 2;
-                    }
-                    else {
-                        ans += "AAAA";
-                        cnt -= 4;
-                    }
-                }
+            if(sz % 2 == 1) {
+                cout<<-1;
+                return 0;
             }
-            ans += '.';   
+            ans = sol(sz, ans) + ".";
+            tmp = "";
         }
     }
-    if(cnt > 0) {
-        if(cnt % 2 == 1) {
-            cout<<-1;
-            return 0;
+    int sz = tmp.size();
 
-        }
-        while(cnt > 0) {
-            if(cnt - 4 < 0) {
-                ans += "BB";
-                cnt -= 2;
-            }
-            else {
-                ans += "AAAA";
-                cnt -= 4;
-                }
-        }
+    if(sz % 2 == 1) {
+        cout<<-1;
+        return 0;
     }
+    ans = sol(sz, ans);
 
-    if(ans.size() == 0) cout<<-1;
-    else cout<<ans;
+    cout<<ans;
+
+
+
 }
