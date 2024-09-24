@@ -1,0 +1,1 @@
+{"name":"Local: test","url":"c:\\Users\\elizd\\Desktop\\알고리즘\\test.cpp","tests":[{"id":1715495720994,"input":"_ab_\n2","output":""},{"id":1715497563467,"input":"AB\n1","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\elizd\\Desktop\\알고리즘\\test.cpp","group":"local","local":true}
