@@ -1,8 +1,9 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-
 int main() {
-    int n; cin>>n;
-    cout<< (n % 2 ? "SK" : "CY");
+    int N; cin>>N;
+
+    if(N%2 == 1) cout<<"SK";
+    else cout<<"CY";
 }
