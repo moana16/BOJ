@@ -1,67 +1,59 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
+#include<bits/stdc++.h>
 using namespace std;
-//상하좌우가 연결되어있어야함
-// 5<=N<=25
-constexpr int MAX=27;
-int N; //지도의 크기 저장할 배열
-int mat[MAX][MAX];
-bool visited[MAX][MAX];
-int dy[]={0,0,1,-1};
-int dx[]={1,-1,0,0};
-int num=1; //단지 번호
-vector<int> v; //단지에 속하는 집의 개수 저장할 벡터
-int house=0; //단지에 속하는 집의 개수
 
- 
-void DFS(int y, int x) {
-    visited[y][x] = true;
-    mat[y][x] = num;
-    house++;
- 
-    for (int i = 0; i < 4; i++) {
-        int nx = x + dx[i];
-        int ny = y + dy[i];
+int N; 
+int mat[30][30];
+bool visited[30][30];
+int dx[4] = {1,0,-1,0};
+int dy[4] = {0,1,0,-1};
+vector<int> ans;
+
+void BFS(int i, int j) {
+    queue<pair<int,int>> q;
+    q.push({i,j});
+    visited[i][j] = true;
+
+    int cnt = 1;
+    while (!q.empty())
+    {
+        int x = q.front().first;
+        int y = q.front().second;
+        q.pop();
         
-        if (nx < 0 || ny < 0 || nx >= N || ny >= N)
-            continue;
- 
-        if (mat[ny][nx] == 1 && visited[ny][nx] == 0) {
-            DFS(ny, nx);
+        for(int r=0; r<4; r++) {
+            int nx = x + dx[r];
+            int ny = y + dy[r];
+
+            if(nx < 0 || ny < 0 || nx >= N || ny >= N || visited[nx][ny] || mat[nx][ny] == 0) continue;
+            cnt++;
+            q.push({nx,ny});
+            visited[nx][ny] = true;
         }
     }
+    ans.push_back(cnt);
 }
- 
+
 int main() {
-    cin >> N;
-    
-    for (int i = 0; i < N; i++) {
-        string input;
-        cin >> input;
- 
-        for (int j = 0; j < N; j++) {
-            mat[i][j] = input.at(j) - '0';
+    ios::sync_with_stdio(false); cin.tie(0);
+    cin>>N;
+    for(int i=0; i<N; i++) {
+        string str; cin>>str;
+        for(int j=0; j<N; j++) {
+            mat[i][j] = str[j] - '0';
         }
     }
- 
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            if (mat[i][j] == 1 && visited[i][j] == 0) {
-                DFS(i, j);
-                num++;
-                v.push_back(house);
-                house = 0;
+
+
+    for(int i=0; i<N; i++) {
+        for(int j=0; j<N; j++) {
+            if(mat[i][j] == 1 && !visited[i][j]) {
+                BFS(i,j);
             }
         }
+
     }
- 
-    sort(v.begin(), v.end());
- 
-    cout << num-1 << endl;
-    for (int i = 0; i < v.size(); i++) {
-        cout << v[i] << endl;
-    }
- 
+
+    cout<<ans.size()<<'\n';
+    sort(ans.begin(), ans.end());
+    for(auto c : ans) cout<<c<<'\n';
 }
