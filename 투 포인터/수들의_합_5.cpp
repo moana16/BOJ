@@ -1,21 +1,23 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-
-int ans = 0, sum = 0;
 
 int main() {
     int N; cin>>N;
-    
-    int st = 1, en = 1;
-    
-    while(st <= en && en <= N) {
-        if(sum < N) sum += en++;
+
+    int s = 1;
+    int e = 1;
+
+    int cnt = 1, sum = 0;
+
+    while(s <= e && e <= N) {
+        if(sum < N) sum += e++;
         else {
-            if(sum == N) ans++;
-            sum -= st++;
+            if(sum == N) cnt++;
+            sum -= s++;
         }
     }
 
-    cout<<ans+1;
+    cout<<cnt;
+
+
 }
