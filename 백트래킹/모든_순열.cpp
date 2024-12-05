@@ -1,28 +1,29 @@
 #include<bits/stdc++.h>
 using namespace std;
+bool visited[10];
 
-int N;
-int visited[9], num[9];
-
-void sol(int cnt) {
+void sol(int cnt, int N, vector<int>& nums) {
     if(cnt == N) {
-        for(int i=0; i<N; i++) cout<<num[i]<<" ";
+        for(auto n : nums) cout<<n<<" ";
         cout<<'\n';
         return;
     }
+
     for(int i=1; i<=N; i++) {
-        if(!visited[i]) {
-            visited[i] = true;
-            num[cnt] = i;
-            sol(cnt+1);
-            visited[i] = false;
-        }
+        if(visited[i]) continue;
+
+        nums.push_back(i);
+        visited[i] = true;
+        sol(cnt+1, N, nums);
+        nums.pop_back();
+        visited[i] = false;
     }
 }
-int main() {
-    cin>>N;
 
+int main() {
+    int N; cin>>N;
     memset(visited, false, sizeof(visited));
 
-    sol(0);
+    vector<int> nums;
+    sol(0, N, nums);
 }
