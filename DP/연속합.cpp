@@ -1,16 +1,20 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+int dp[100003];
+
 int main() {
     int n; cin>>n;
-    int arr[100003];
-    for(int i=1; i<=n; i++) cin>>arr[i];
+    vector<int> v(n);
+    
+    for(int i=0; i<n; i++) cin>>v[i];
 
-    int dp[100003];
+    dp[0] = v[0];
 
-    for(int i=1; i<=n; i++) {
-        dp[i] = max(arr[i], dp[i-1]+arr[i]);
-
+    for(int i=1; i<n; i++) {
+        dp[i] = max(dp[i-1] + v[i], v[i]);
     }
-    cout<<*max_element(dp+1, dp+n+1);
+
+    cout<<*max_element(dp, dp+n);
+
 }
