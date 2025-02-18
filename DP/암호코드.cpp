@@ -1,30 +1,29 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-
-int arr[5005];
-int dp[5005];
-constexpr int mod = 1000000;
-
-//범위는 1~26
+const int MOD = 1000000;
 int main() {
-    string s; cin>>s;
-    int n = s.length();
-    if(s[0] == '0') {
+    string password; cin>>password;
+
+    if(password[0] == '0') {
         cout<<0;
         return 0;
+    }
 
-    }
-    for(int i=1; i<=n;i++) {
-        arr[i] = s[i-1]-'0';
-    }
+    int n = password.size();
+
+    int dp[5005]={0};
+
     dp[0] = 1;
-    for(int i=1; i<=n; i++) {
-        if(arr[i] > 0) dp[i] = (dp[i] + dp[i-1]) % mod;
-        int x = arr[i-1]*10 + arr[i];
-        if(x >= 10 && x <= 26) dp[i] = (dp[i] + dp[i-2]) % mod;
+    dp[1] = 1;
 
+    for(int i=2; i<=n; i++) {
+        int oneDigit = password[i - 1] - '0';             // 한 자리 숫자
+        int twoDigit = (password[i - 2] - '0') * 10 + oneDigit;  // 두 자리 숫자
+
+        if(oneDigit >= 1) dp[i] = (dp[i] + dp[i-1]) % MOD;
+        if(10 <= twoDigit && twoDigit <= 26) dp[i] = (dp[i] + dp[i-2]) % MOD;
     }
-    cout<<dp[n];    
 
+    cout<<dp[n];
 
 }
