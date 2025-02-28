@@ -1,23 +1,21 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int dp[103], cost[103], happy[103];
-
 int main() {
-    int N; 
-    cin >> N;
-    for(int i = 0; i < N; ++i) {
-        cin >>cost[i];
-    }
-    for(int i = 0; i < N; ++i) {
-        cin >>happy[i];
-    }
+    int N; cin>>N;
 
-    for(int i=0; i<N; i++) {
-        for(int j=100; j>cost[i]; j--) {
-            dp[j] = max(dp[j], dp[j-cost[i]]+happy[i]);
+    vector<int> L(N+1), J(N+1);
+    for(int i=1; i<=N; i++) cin>>L[i];
+    for(int i=1; i<=N; i++) cin>>J[i];
+
+    int strength = 100;
+    int dp[103] = {0};
+    dp[100] = 0;
+    for(int i=1; i<=N; i++) {
+        for(int j=100; j>L[i]; j--) {
+            dp[j] = max(dp[j], dp[j-L[i]] + J[i]);
         }
     }
+
     cout<<dp[100];
-    return 0;
 }
