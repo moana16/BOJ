@@ -1,34 +1,18 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-constexpr int MAX = 1003;
+int dp[1003][1003]; // A의 앞 i개 문자와 B의 앞 j개 문자로 만들 수 있는 LCS의 길이
+int main() {
+    string s1, s2; cin>>s1>>s2;
+    int n = s1.length();
+    int m = s2.length();
 
-string A;
-string B;
-int dp[MAX][MAX];
-
-void sol() {
-    string str1= "#" + A;
-    string str2 = "#" + B;
-
-    int N = A.size();
-    int M = B.size();
-
-    for(int i=1; i<=N; i++) {
-        for(int j=1; j<=M; j++) {
-            if(str1[i]==str2[j]) dp[i][j] = dp[i-1][j-1]+1;
+    for(int i=1; i<=n; i++) {
+        for(int j=1; j<=m; j++) {
+            if(s1[i-1] == s2[j-1]) dp[i][j] = dp[i-1][j-1]+1;
             else dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
         }
     }
-    cout<<dp[N][M];
-}
 
-
-int main() {
-    cin>>A;
-    cin>>B;
-
-    sol();
-
-
+    cout<<dp[n][m];
 }

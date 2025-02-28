@@ -1,25 +1,26 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-int dp[202][202];
-const int MOD = 1000000000;
-int N,K;
+constexpr int MOD = 1000000000;
+int dp[202][202]; // dp[i][j]: i를 j개의 숫자로 만드는 경우의 수
 
 int main() {
-    cin>>N>>K;
+    int N, K;
+    cin >> N >> K;
 
-    for(int i=0; i<=N; i++) dp[i][1] = 1;
+    for (int i = 0; i <= N; i++) {
+        dp[i][1] = 1; 
+    }
+    for (int j = 1; j <= K; j++) {
+        dp[0][j] = 1; 
+    }
 
-    for(int j=1; j<=K; j++) {
-        for(int i=0; i<=N; i++) {
-            for(int t=0; t<=i; t++) {
-                dp[i][j] = (dp[i][j] + dp[i-t][j-1] ) % MOD;
-            }
+    for (int j = 2; j <= K; j++) { 
+        for (int i = 1; i <= N; i++) { 
+            dp[i][j] = (dp[i][j - 1] + dp[i - 1][j]) % MOD;
         }
     }
 
-    cout<<dp[N][K] %MOD;
-
-
+    cout << dp[N][K] << '\n';
 
 }
