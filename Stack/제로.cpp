@@ -1,25 +1,18 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-
 int main() {
-    int k; cin>>k;
-    stack<int> s;
-    int num = 0;
-    for(int i=0; i<k; i++) {
-        int n; cin>>n;
-        if(n == 0) s.pop();
-        else  {
-            s.push(n);
-        }
+    int K; cin>>K;
+    stack<int> st;
+    while(K--) {
+        int x; cin>>x;
+        if(x == 0) st.pop();
+        else st.push(x);
     }
-    while (!s.empty())
-    {
-        num += s.top();
-        s.pop();
+    int ans = 0;
+    while(!st.empty()) {
+        ans += st.top();
+        st.pop();
     }
-    
-    
-
-    cout<<num;
+    cout<<ans;
 }
