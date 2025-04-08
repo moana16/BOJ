@@ -1,15 +1,21 @@
 #include<bits/stdc++.h>
 using namespace std;
+constexpr int INF = 1e9;
 
-int main() {
+int main(){
     int N; cin>>N;
+
+    vector<int> v(N+1);
+    for(int i=1; i<=N; i++) cin>>v[i];
+
     stack<pair<int,int>> st;
-    st.push({100000001,0});
+    st.push({0,INF});
+
     for(int i=1; i<=N; i++) {
-        int x; cin>>x;
-        while(st.top().first < x) st.pop();
-        cout<<st.top().second<<" ";
-        st.push({x, i});       
+        while(!st.empty() && st.top().second <= v[i]) {
+            st.pop();
+        }
+        cout<<st.top().first<<" ";
+        st.push({i, v[i]});
     }
-    
-}
+}   
