@@ -1,28 +1,29 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-stack<int> s;
-int ans[1000000];
-int a[1000000];
-
 int main() {
-    int n; cin>>n;
-    
-    for (int i = 0; i < n; i++) cin >> a[i];
-    for(int i=n-1; i>=0; i--) {
-        while (!s.empty() && s.top()<= a[i]) 
-        {
-            s.pop();
-        
-        }
-        if(s.empty()) {
-            ans[i] = -1;
+    int N; cin>>N;
+    vector<int> v(N);
+    for(int i=0; i<N; i++) cin>>v[i];
+
+    stack<int> st;
+    vector<int> ans;
+
+    for(int i=N-1; i>=0; i--) {
+        if(st.empty()) {
+            ans.push_back(-1);
         }
         else {
-            ans[i] = s.top();
-            
+            while(!st.empty() && st.top() <= v[i]){
+                st.pop();
+            }
+
+            if(!st.empty()) ans.push_back(st.top());
+            else ans.push_back(-1);
         }
-        s.push(a[i]);
+        st.push(v[i]);
     }
-    for(int i=0; i<n; i++) cout<<ans[i]<<" ";
+
+    reverse(ans.begin(), ans.end());
+    for(auto a : ans) cout<<a<<" ";
 }
