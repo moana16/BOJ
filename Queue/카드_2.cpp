@@ -1,21 +1,17 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-queue<int> q;
-
 int main() {
-    int n; cin>>n;
-    for(int i=1; i<=n; i++) {  
-        q.push(i);
-    }
-    while(q.size()!=1) {
-        q.pop();
-        int x = q.front();
-        //cout<<x<<" !";
-        q.pop();
-        q.push(x);
+    int N; cin>>N;
+    queue<int> q;
 
+    for(int i=1; i<=N; i++) q.push(i);
+
+    while(q.size() > 1) {
+        q.pop();
+        int t = q.front(); q.pop();
+        q.push(t);
     }
+
     cout<<q.front();
-
 }
