@@ -1,30 +1,29 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-deque<int> d;
-//#1은 pop_front
-//#2는..??
-//#3는...
-
 int main() {
-    int n,m; cin>>n>>m;
-    for(int i=1; i<=n; i++) d.push_back(i);
-    int ret = 0;
-    while(m--) {
+    int N,M; cin>>N>>M;
+    deque<int> dq;
+    for(int i=1; i<=N; i++) dq.push_back(i);
+
+    int cnt = 0;
+    for(int i=0; i<M; i++) {
         int x; cin>>x;
-        int idx = find(d.begin(), d.end(), x) - d.begin();
-        while(d.front() != x) {
-            if( idx < (int)d.size() - idx) {
-                d.push_back(d.front());
-                d.pop_front();
+        int idx = find(dq.begin(), dq.end(), x) - dq.begin();
+
+        while(dq.front() != x) {
+            if(idx < (int)dq.size() - idx) {
+                dq.push_back(dq.front());
+                dq.pop_front();
+            }else {
+                dq.push_front(dq.back());
+                dq.pop_back();
             }
-            else {
-                d.push_front(d.back());
-                d.pop_back();
-            }
-            ret++;
+            cnt++;
         }
-        d.pop_front();
+        dq.pop_front();
+
     }
-    cout<<ret;
+
+    cout<<cnt;
 }
